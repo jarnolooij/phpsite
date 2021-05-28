@@ -79,7 +79,7 @@ class Auth {
 				// Check if the token is valid				
 				if (hash_equals($row['token'], hash('sha256', base64_decode($authenticator)))) {
 					$userId = $row['user_id'];
-					echo 'Cookie login!';
+
 					// Get the user from the cookies user_id
 					$res = $this->database->query('SELECT * FROM users WHERE id = ?', 'i', $userId)->get_result();
 					
