@@ -17,6 +17,8 @@ class Auth {
 			// Check the password
 			if (password_verify($password, $user['password'])) {
 				// Set the session
+                unset($user['password']);
+                // TODO break into methods, hide password hash from user array
 				$_SESSION['user'] = $user;
 
 				// If the user wants a persistent session, generate a cookie for later authentication

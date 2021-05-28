@@ -8,6 +8,6 @@
 	<body>
 		Logged in!
 
-		{dump user}
+		{% dump user %}
 	</body>
 </html>

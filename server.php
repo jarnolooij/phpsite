@@ -55,7 +55,9 @@ Router::get('/session/destroy', function() {
 Router::get('/test', function() {
 	View::make('test', [
 		'test' => 'testing variables',
-		'array' => [1, 2, 3, 4]
+		'array' => [1, 2, 3, 4],
+        'true' => true,
+        'false' => false
 	]);
 });
 

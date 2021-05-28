@@ -20,7 +20,7 @@ Router::get('/users/:id/profile', function($id) {
 ### dependency injection
 If you need access to a controller inside a routes callback, you can simply add it as a parameter
 ```php
-Router::post('/auth/login`, function(Auth $auth) {
+Router::post('/auth/login', function(Auth $auth) {
   // $auth is now available
 });
 ```

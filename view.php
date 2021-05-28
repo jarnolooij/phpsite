@@ -101,6 +101,11 @@ class View {
 		/* replace {% endfor %} with <?php } ?> */
 		$code = preg_replace('~{% endfor %}~is', '<?php } ?>', $code);
 		
+		$code = preg_replace('~{% if (.+?) (then )?%}~is', '<?php if($$1) { ?>', $code);
+		$code = preg_replace('~{% elseif (.+?) (then )?%}~is', '<?php } else if($$1) { ?>', $code);
+		$code = preg_replace('~{% else %}~is', '<?php } else { ?>', $code);
+		$code = preg_replace('~{% endif %}~is', '<?php } ?>', $code);
+
 		/* Replace {{ VAR }} with <?php VAR ?> */
 		// Used to easily execute raw php code
 		$code = preg_replace('~{{ (.+?) }}~is', '<?php $1 ?>', $code);
