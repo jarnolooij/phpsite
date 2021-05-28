@@ -13,7 +13,7 @@ Router::get('/', function() {
 	if (!isset($_SESSION['user'])) {
 		header('location: /login');
 	} else {
-		View::make('views/index', ['user' => $_SESSION['user']]);
+		View::make('index', ['user' => $_SESSION['user']]);
 	}
 });
 
@@ -21,7 +21,7 @@ Router::get('/login', function() {
 	if (isset($_SESSION['user'])) {
 		header('location: /');
 	} else {
-		View::make('views/login');
+		View::make('login');
 	}
 });
 
@@ -29,7 +29,7 @@ Router::get('/register', function() {
 	if (isset($_SESSION['user'])) {
 		header('location: /');
 	} else {
-		View::make('views/register');
+		View::make('register');
 	}
 });
 
@@ -50,6 +50,13 @@ Router::get('/session', function() {
 Router::get('/session/destroy', function() {
 	session_destroy();
 	header('location: /');
+});
+
+Router::get('/test', function() {
+	View::make('test', [
+		'test' => 'testing variables',
+		'array' => [1, 2, 3, 4]
+	]);
 });
 
 Router::submit();
