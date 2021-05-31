@@ -1,16 +1,17 @@
 <?php
 
-require 'envloader.php';
-require 'database.php';
-require 'router.php';
-require 'auth.php';
-require 'view.php';
+spl_autoload_register(function ($class_name) {
+    include strtolower($class_name) . '.php';
+});
+
+EnvLoader::load();
 
 function dd(...$obj) {
-	var_dump($obj);
+    foreach($obj as $dump) {
+        var_dump($dump);
+    }
 	die();
 }
-
 
 function flash($key) {
 	if (isset($_SESSION['flash'][$key])) {

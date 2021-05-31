@@ -2,12 +2,12 @@
 
 class Router {
 	
-	private static $dependencies = array();
+	// private static $dependencies = array();
 	private static $endpoints = array('get', 'post', 'put', 'delete');
 
-	public static function loadDependency($name, $object) {
-		self::$dependencies[$name] = $object;
-	}
+	// public static function loadDependency($name, $object) {
+	// 	self::$dependencies[$name] = $object;
+	// }
 
 	public static function get($endpoint, $callback) {
 		self::$endpoints['get'][$endpoint] = $callback;
@@ -43,7 +43,7 @@ class Router {
 				for ($i = 0; $i < count($parts); $i++) {
 					// If the part is a parameter, don't compare, instead add to array
 					if (substr($parts[$i], 0, 1) == ':') {
-						$parameters[substr($parts[$i], 1)] = $uriParts[$i];
+						$parameters[] = $uriParts[$i];
 						continue;
 					}
 					// If the part is not a parameter, compare to the uri
@@ -77,23 +77,23 @@ class Router {
 			$refCallback = new ReflectionFunction($callback);
 			
 			// Initialize array
-			$parameters = array();
+			// $parameters = array();
 
 			// Loop over the callback parameters
-			foreach ($refCallback->getParameters() as $parameter) {
-				// If it doesn't have a class, ignore
-				if ($parameter->getClass() == null) continue;
+			// foreach ($refCallback->getParameters() as $parameter) {
+			// 	// If it doesn't have a class, ignore
+			// 	if ($parameter->getClass() == null) continue;
 				
-				// Find the dependency object, add to parameters array in order
-				if (array_key_exists($parameter->getClass()->name, self::$dependencies)) {
-					$parameters[] = self::$dependencies[$parameter->getClass()->name];
-				} else {
-					die('Missing dependency! ' . $parameter->getClass()->name);
-				}
-			}
+			// 	// Find the dependency object, add to parameters array in order
+			// 	if (array_key_exists($parameter->getClass()->name, self::$dependencies)) {
+			// 		$parameters[] = self::$dependencies[$parameter->getClass()->name];
+			// 	} else {
+			// 		die('Missing dependency! ' . $parameter->getClass()->name);
+			// 	}
+			// }
 
 			// Invoke the callback, and include route parameters
-			$refCallback->invokeArgs(array_merge($parameters, $match['parameters']));
+			$refCallback->invoke(...$match['parameters']);
 		} else {
 			http_response_code(404);
 		}

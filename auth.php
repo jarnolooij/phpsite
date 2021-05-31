@@ -1,16 +1,24 @@
 <?php
 
 class Auth {
+    private static $instance;
 	private $database;
 
-	public function __construct(Database $database) {
-		$this->database = $database;
+	public function __construct() {
 		$this->cookieLogin();
 	}
 
+    public static function instance() {
+        if (self::$instance == null) {
+            self::$instance = new Auth;
+        }
+
+        return self::$instance;
+    }
+
 	public function login($user, $password, $remember) {
 		// Get the user from the database
-		$res = $this->database->query('SELECT * FROM users WHERE username = ?', 's', $user)->get_result();
+		$res = Database::query('SELECT * FROM users WHERE username = ?', $user)->get_result();
 
 		if ($res->num_rows > 0) {
 			$user = $res->fetch_assoc();
@@ -35,7 +43,7 @@ class Auth {
 
 	// Check if a username is available for registration 
 	private function isNameAvailable($user) {
-		$stmt = $this->database->query('SELECT username FROM users WHERE username = ?', 's', $user);
+		$stmt = Database::query('SELECT username FROM users WHERE username = ?', $user);
 
 		return $stmt->get_result()->num_rows == 0;
 	}
@@ -60,7 +68,7 @@ class Auth {
 		$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
 		// Insert the new user, and log them in
-		$this->database->query('INSERT INTO users (username, password) VALUES (?, ?)', 'ss', $user, $passwordHash);
+		Database::query('INSERT INTO users (username, password) VALUES (?, ?)', $user, $passwordHash);
 		$this->login($user, $password, false);
 
 		return "Registration sucessful";
@@ -73,7 +81,7 @@ class Auth {
 			list($selector, $authenticator) = explode(':', $_COOKIE['authsess']);
 
 			// Get the session token for this cookie
-			$res = $this->database->query('SELECT * FROM auth_tokens WHERE selector = ?', 's', $selector)->get_result();
+			$res = Database::query('SELECT * FROM auth_tokens WHERE selector = ?', $selector)->get_result();
 
 			if ($res->num_rows == 1) {
 				$row = $res->fetch_assoc();
@@ -83,7 +91,7 @@ class Auth {
 					$userId = $row['user_id'];
 
 					// Get the user from the cookies user_id
-					$res = $this->database->query('SELECT * FROM users WHERE id = ?', 'i', $userId)->get_result();
+					$res = Database::query('SELECT * FROM users WHERE id = ?', $userId)->get_result();
 					
 					if ($res->num_rows == 1) {
 						$user = $res->fetch_assoc();
@@ -99,7 +107,7 @@ class Auth {
 
 	private function generateSessionCookie($userId, $oldSelector = null) {
 		if ($oldSelector != null) {
-			$this->database->query('DELETE FROM auth_tokens WHERE selector = ?', 's', $oldSelector)->close();
+			Database::query('DELETE FROM auth_tokens WHERE selector = ?', $oldSelector)->close();
 		}
 
 		// 2 week expire time for the session / cookie
@@ -119,6 +127,6 @@ class Auth {
 			true
 		);
 
-		$this->database->query('INSERT INTO auth_tokens (selector, token, user_id, expires) VALUES (?, ?, ?, ?)', 'ssis', $selector, $authenticatorHash, $userId, $expires);
+		Database::query('INSERT INTO auth_tokens (selector, token, user_id, expires) VALUES (?, ?, ?, ?)', $selector, $authenticatorHash, $userId, $expires);
 	}
 }
