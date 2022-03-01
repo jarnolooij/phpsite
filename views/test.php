@@ -5,5 +5,5 @@
 {% block content %}
 	{% for tests as test %}
         { test->name } <br>
-    {% endfor %}
+    {% endfor %}
 {% block %}

@@ -1,7 +1,7 @@
 <?php
 
 spl_autoload_register(function ($class_name) {
-    include strtolower($class_name) . '.php';
+    include str_replace('\\', '/', strtolower($class_name)) . '.php';
 });
 
 EnvLoader::load();

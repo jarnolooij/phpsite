@@ -54,12 +54,39 @@ Router::get('/test/update/:id', function($id) {
     $test->save();
 });
 
+Router::get('/test/new/:name', function($name) {
+    $test = new TestModel;
+    $test->name = $name;
+    $test->save();
+    echo $test->id;
+});
+
 Router::get('/test', function() {
 	$tests = TestModel::all();
     
     View::make('test', [
         'tests' => $tests
     ]);
+});
+
+Router::get('/download', function() {
+    if (isset($_SESSION['user'])) {
+        $path = '/Users/radboudmetselaar/Desktop/logintest/private/private.txt';
+    
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename='.basename($path));
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($path));
+        ob_clean();
+        flush();
+        readfile($path);
+    } else {
+        header('location: /');
+    }
 });
 
 Router::submit();

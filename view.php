@@ -99,7 +99,7 @@ class View {
 		// Used for easy for loops
 		$code = preg_replace('~{% for (.+?) as (.+?) %}~is', '<?php foreach($$1 as $$2) { ?>', $code);
 		/* replace {% endfor %} with <?php } ?> */
-		$code = preg_replace('~{% endfor %}~is', '<?php } ?>', $code);
+		$code = preg_replace('~{% endfor %}~is', '<?php } ?>', $code);
 		
 		$code = preg_replace('~{% if (.+?) (then )?%}~is', '<?php if($$1) { ?>', $code);
 		$code = preg_replace('~{% elseif (.+?) (then )?%}~is', '<?php } else if($$1) { ?>', $code);

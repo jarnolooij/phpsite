@@ -93,6 +93,8 @@ class Model {
             $query .= ')';
 
             Database::query($query, ...$properties);
+
+            $this->id = Database::getConnection()->insert_id;
         } else {
             $query = "UPDATE $table SET ";
         
