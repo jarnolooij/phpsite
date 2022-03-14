@@ -46,7 +46,7 @@
 	<body>
 		<div class="description">
 			<img src="/img/scoutinglogo75jaar.png" class="logo-image"> 
-			<form>
+			<form target="/upload" method="POST">
 				<p>Upload hier jouw favoriete foto en schrijf eventueel ook een stukje tekst voor in het fotoboek!</p>
 				<label for="img">Selecteer afbeelding:</label>
 				<div class="whitespace">
@@ -54,17 +54,12 @@
 				</div>
 				<textarea rows = "5" cols = "30" name = "description" placeholder="Deel jouw verhaal..."></textarea>
 				<br>
-				<a href="home.php"><button type="submit" class="btn btn-success" onclick="Succes()">Enter</button></a>
+				<button type="submit" class="btn btn-success">Enter</button>
 			</form>
 		</div>
 
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-		
-		<script>
-			function Succes() {
-				alert("Jouw toevoeging aan het digitaal fotoboek is gelukt!");
-			} 
-		</script>
+
 	</body>
 </html>

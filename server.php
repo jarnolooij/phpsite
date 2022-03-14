@@ -3,7 +3,7 @@
 require 'inc.php';
 
 use models\User;
-use models\TestModel;
+use models\Upload;
 
 Router::get('/', function() {
 	View::make('home');
@@ -11,6 +11,27 @@ Router::get('/', function() {
 
 Router::get('/upload', function() {	
 	View::make('upload');
+});
+
+Router::post('/register', function() {
+    if (isset($_POST['email']) && !empty($_POST["email"])) {
+        if (User::where('email', $_POST["email"]) == null) {
+            $user = new User;
+            $user->email = $_POST['email'];
+            $user->save();
+        }
+    }
+
+    header('location: /upload');
+});
+
+Router::post('/upload', function() {
+    $upload = new Upload;
+    $upload->file = "";
+    $upload->description = $_POST["description"];
+    $upload->save();
+
+    header('location: /');
 });
 
 Router::submit();

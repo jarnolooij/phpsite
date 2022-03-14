@@ -41,12 +41,12 @@
       <h5>Digitaal Fotohokje</h5>
       <p>Voor het 75 jaar bestaan van Scouting Uotha Uden feest maken we een fotoboek. Voer je E-Mail addres in als je een digitaal fotoboek wilt. Zo niet klik dan direct op doorgaan!</p>
       <br>
-      <form>
-        <input type="text" placeholder="Voer uw E-mail in..." name="email" required>  
+      <form action="/register" method="POST">
+        <input type="email" placeholder="Voer uw E-mail in..." name="email">  
+        <div class="button-padding">
+          <button type="submit" class="btn btn-success">Doorgaan</button>
+        </div>
       </form>
-      <div class="button-padding">
-        <a href="upload"><button type="button" class="btn btn-success">Doorgaan</button></a>
-      </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
