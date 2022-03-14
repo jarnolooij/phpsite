@@ -37,7 +37,7 @@
   </head>
   <body>
     <div class="description">
-      <img src="scoutinglogo75jaar.png" class="logo-image">
+      <img src="/img/scoutinglogo75jaar.png" class="logo-image">
       <h5>Digitaal Fotohokje</h5>
       <p>Voor het 75 jaar bestaan van Scouting Uotha Uden feest maken we een fotoboek. Voer je E-Mail addres in als je een digitaal fotoboek wilt. Zo niet klik dan direct op doorgaan!</p>
       <br>
@@ -45,7 +45,7 @@
         <input type="text" placeholder="Voer uw E-mail in..." name="email" required>  
       </form>
       <div class="button-padding">
-        <a href="upload.html"><button type="button" class="btn btn-success">Doorgaan</button></a>
+        <a href="upload"><button type="button" class="btn btn-success">Doorgaan</button></a>
       </div>
     </div>
 

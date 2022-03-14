@@ -45,7 +45,7 @@
 	</head>
 	<body>
 		<div class="description">
-			<img src="scoutinglogo75jaar.png" class="logo-image"> 
+			<img src="/img/scoutinglogo75jaar.png" class="logo-image"> 
 			<form>
 				<p>Upload hier jouw favoriete foto en schrijf eventueel ook een stukje tekst voor in het fotoboek!</p>
 				<label for="img">Selecteer afbeelding:</label>

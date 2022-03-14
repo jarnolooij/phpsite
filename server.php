@@ -6,10 +6,10 @@ use models\User;
 use models\TestModel;
 
 Router::get('/', function() {
-	View::make('index');
+	View::make('home');
 });
 
-Router::get('/home', function() {	
+Router::get('/upload', function() {	
 	View::make('upload');
 });
 
