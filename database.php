@@ -5,7 +5,7 @@ class Database {
 
 	public static function getConnection() {
         if (self::$mysqli == null) {
-            self::$mysqli = new mysqli($_ENV['135.181.61.222'], $_ENV['scouting'], $_ENV['hnceR4UfLjYFqq8n'], $_ENV['scouting']);
+            self::$mysqli = new mysqli($_ENV['DB_HOST'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD'], $_ENV['DB_DATABASE']);
 
             if (self::$mysqli->connect_errno) {
                  die("Failed to connect to MySQL: " . self::$mysqli -> connect_error);
