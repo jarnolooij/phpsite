@@ -7,36 +7,36 @@ use models\TestModel;
 
 Router::get('/', function() {
 	if (!isset($_SESSION['user'])) {
-		header('location: /login');
+		header('location: /home');
 	} else {
 		View::make('index', ['user' => $_SESSION['user']]);
 	}
 });
 
-Router::get('/login', function() {	
+Router::get('/home', function() {	
 	if (isset($_SESSION['user'])) {
 		header('location: /');
 	} else {
-		View::make('login');
+		View::make('home');
 	}
 });
 
-Router::get('/register', function() {
+Router::get('/upload', function() {
 	if (isset($_SESSION['user'])) {
 		header('location: /');
 	} else {
-		View::make('register');
+		View::make('upload');
 	}
 });
 
-Router::post('/auth/login', function() {
-	$_SESSION['flash']['LOGIN_MESSAGE'] = Auth::instance()->login($_POST['username'], $_POST['password'], isset($_POST['remember']));
-	header('location: /login');
+Router::post('/auth/home', function() {
+	$_SESSION['flash']['LOGIN_MESSAGE'] = Auth::instance()->login($_POST['email']);
+	header('location: /home');
 });
 
-Router::post('/auth/register', function() {
-	$_SESSION['flash']['REG_MESSAGE'] = Auth::instance()->register($_POST['username'], $_POST['password'], $_POST['password_confirm']);
-	header('location: /register');
+Router::post('/auth/upload', function() {
+	$_SESSION['flash']['REG_MESSAGE'] = Auth::instance()->register($_POST['img'], $_POST['description']);
+	header('location: /upload');
 });
 
 Router::get('/session', function() {
@@ -46,27 +46,6 @@ Router::get('/session', function() {
 Router::get('/session/destroy', function() {
 	session_destroy();
 	header('location: /');
-});
-
-Router::get('/test/update/:id', function($id) {
-	$test = TestModel::where('id', $id)[0];
-    $test->name = "RENAME TEST!!";
-    $test->save();
-});
-
-Router::get('/test/new/:name', function($name) {
-    $test = new TestModel;
-    $test->name = $name;
-    $test->save();
-    echo $test->id;
-});
-
-Router::get('/test', function() {
-	$tests = TestModel::all();
-    
-    View::make('test', [
-        'tests' => $tests
-    ]);
 });
 
 Router::get('/download', function() {
