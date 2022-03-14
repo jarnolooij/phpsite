@@ -18,6 +18,7 @@ Router::post('/register', function() {
         if (User::where('email', $_POST["email"]) == null) {
             $user = new User;
             $user->email = $_POST['email'];
+            $user->fotoboek = $_POST['fotoboek'];
             $user->save();
         }
     }

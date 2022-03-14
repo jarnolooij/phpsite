@@ -39,10 +39,13 @@
     <div class="description">
       <img src="/img/scoutinglogo75jaar.png" class="logo-image">
       <h5>Digitaal Fotohokje</h5>
-      <p>Voor het 75 jaar bestaan van Scouting Uotha Uden feest maken we een fotoboek. Voer je E-Mail addres in als je een digitaal fotoboek wilt. Zo niet klik dan direct op doorgaan!</p>
+      <p>Voor het 75 jaar bestaan van Scouting Uotha Uden feest maken we een fotoboek. Voer je E-Mail addres in als je een digitaal fotoboek wilt en vink de checkbox aan als u een papieren fotoboek wilt. Zo niet klik dan direct op doorgaan!</p>
       <br>
       <form action="/register" method="POST">
-        <input type="email" placeholder="Voer uw E-mail in..." name="email">  
+        <input type="email" placeholder="Voer uw E-mail in..." name="email"> 
+        <br> 
+        <input type="checkbox" name="fotoboek">
+        <label for="fotoboek"> ik wil een fotoboek!</label>
         <div class="button-padding">
           <button type="submit" class="btn btn-success">Doorgaan</button>
         </div>
