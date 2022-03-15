@@ -44,7 +44,7 @@
       <form action="/register" method="POST">
         <input type="email" placeholder="Voer uw E-mail in..." name="email"> 
         <br> 
-        <input type="checkbox" name="fotoboek">
+        <input type="checkbox" name="fotoboek" value="1">
         <label for="fotoboek"> ik wil een fotoboek!</label>
         <div class="button-padding">
           <button type="submit" class="btn btn-success">Doorgaan</button>

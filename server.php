@@ -15,7 +15,7 @@ Router::get('/upload', function() {
 
 Router::post('/register', function() {
     if (isset($_POST['email']) && !empty($_POST["email"])) {
-        if (User::where('email', $_POST["email"]) == null) {
+        if (User::where('email', $_POST["email"]) == null && User::where('fotoboek', $_POST["fotoboek"]) == null) {
             $user = new User;
             $user->email = $_POST['email'];
             $user->fotoboek = $_POST['fotoboek'];
