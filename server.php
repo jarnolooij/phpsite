@@ -19,7 +19,6 @@ Router::post('/register', function() {
             $user = new User;
             $user->email = $_POST['email'];
             $user->fotoboek = $_POST['fotoboek'];
-            ///
             $user->save();
         }
     }
